@@ -18,18 +18,27 @@ def g4_match(X,Y):
     D = "DE"
 
     spl_mismatch, mismatch = (0,0)
+    # for x,y in zip(X,Y):
+    #     if ('N' != y):
+    #         if (y == 'T' or y == 'A' or y == 'G'):
+    #             spl_mismatch+=1
+    #     elif ('K' != y):
+    #         if (y == 'L' or y == 'Q'):
+    #             spl_mismatch+=1
+    #     elif ('D' != y):
+    #         if (y == 'E'):
+    #             spl_mismatch+=1
 
     for x,y in zip(X,Y):
-
-        if not (x == 'X' or y == x):
-            if(x == 'T' and y in N):
+        if not (y in "NKD"):
+            if (y in N):
                 spl_mismatch+=1
-            if(x == 'L' and y in K):
+            elif (y in K):
                 spl_mismatch+=1
-            if(x == 'E' and y in D):
+            elif (y in D):
                 spl_mismatch+=1
-        # else:
-        #     mismatch+=1
+            else:
+                mismatch+=1
 
     if mismatch > 0 or spl_mismatch > 2:
         return False

@@ -13,18 +13,20 @@ def g4_match(g4,protein):
     K = "KLQ"
     D = "DE"
 
-    spl_mismatch, mismatch = (0,0)
-
+    spl_mismatch = 0
+    mismatch = 0
     for x,y in zip(g4,protein):
-        print x, y
-        if not (x == 'X' or y == x):
-            if((x == 'T' and y in N) or (x == 'L' and y in K) or (x == 'E' and y in D)):
+        if not (y in "NKD"):
+            if (y in N):
+                spl_mismatch+=1
+            elif (y in K):
+                spl_mismatch+=1
+            elif (y in D):
                 spl_mismatch+=1
             else:
                 mismatch+=1
-    print mismatch
-    print spl_mismatch
-    if mismatch > 0 or spl_mismatch > 2:
+
+    if mismatch > 0 or spl_mismatch > 0:
         return False
 
     return True
