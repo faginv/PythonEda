@@ -30,17 +30,36 @@ def g4_match(X,Y):
     #             spl_mismatch+=1
 
     for x,y in zip(X,Y):
-        if not (y in "NKD"):
-            if (y in N):
-                spl_mismatch+=1
-            elif (y in K):
-                spl_mismatch+=1
-            elif (y in D):
+        # print('--')
+        # print(x,y)
+        if (x == 'N'):
+            if (y == 'N'):
+                pass
+            elif (y != 'N' and y in 'TAG'):
                 spl_mismatch+=1
             else:
                 mismatch+=1
 
-    if mismatch > 0 or spl_mismatch > 2:
+        if (x == 'K'):
+            if (y == 'K'):
+                pass
+            elif (y != 'K' and y in 'LQ'):
+                spl_mismatch+=1
+            else:
+                mismatch+=1
+
+        if (x == 'X'):
+            pass
+
+        if (x == 'D'):
+            if (y == 'D'):
+                pass
+            elif (y == 'E'):
+                spl_mismatch+=1
+            else:
+                mismatch+=1
+
+    if mismatch > 0 or spl_mismatch > 1:
         return False
 
     return True
@@ -61,7 +80,7 @@ def H(protein,x1,x2,x3,x4):
                 elif g4_match(x, candidate):
                     match_positions.append(i)
                     matches        .append(candidate)
-            print("Mmatches: ",matches, match_positions)
+            # print("Mmatches: ",matches, match_positions)
             return matches, match_positions
 
         L1, pL1 = find_matches(x1, match)
@@ -81,17 +100,17 @@ def H(protein,x1,x2,x3,x4):
                         if (40 <= b[0] - a[0] <= 80 and
                             40 <= c[0] - b[0] <= 80 and
                             20 <= d[0] - c[0] <= 80    ):
-                            print(a,b,c,d)
+                            # print(a,b,c,d)
                             candidates.append((a,b,c,d))
                         elif (80 <= b[0] - a[0] <= 120 and
                               40 <= c[0] - b[0] <= 80 and
                               120 <= d[0] - c[0] <= 180 ):
-                            print(a,b,c,d)
+                            # print(a,b,c,d)
                             candidates.append((a,b,c,d))
                         elif (40 <= b[0] - a[0] <= 80 and
                               80 <= c[0] - b[0] <= 80 and
                               120 <= d[0] - c[0] <= 180 ):
-                            print(a,b,c,d)
+                            # print(a,b,c,d)
                             candidates.append((a,b,c,d))
 
 
