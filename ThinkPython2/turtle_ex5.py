@@ -1,18 +1,23 @@
+import math
 import turtle
+
+def polyline(t, length, n, angle):
+    for i in range(n):
+        t.fd(length)
+        t.lt(angle)
 
 def polygon(t,length,n):
     
-    t.pd()
-    
-    for i in range(n):
-        t.fd(length)
-        t.lt(360/n)
+    angle = 360.0 / n
 
+    polyline(t, length, n, angle)    
+        
 def bob():
     
     bob = turtle.Turtle()
-    
-    circle(bob,1)
+    bob.pd()
+
+    circle(bob,100)
     turtle.mainloop()
 
 def circle(t, r):
@@ -21,8 +26,12 @@ def circle(t, r):
 
 def arc(t,r,angle):
 
-    length = 2 * r
-
-    polygon(t, length, angle)
+    length = 2 * math.pi * r * angle / 360
+    n = int(length / 3) + 1
+    
+    step_length = length / n
+    step_angle = angle / n
+    
+    polyline(t, step_length, n, step_angle)
 
 bob()

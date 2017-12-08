@@ -1,3 +1,4 @@
+import math
 import turtle
 
 def polygon(t,length,n):
@@ -12,13 +13,14 @@ def bob():
     
     bob = turtle.Turtle()
     
-    circle(bob,1)
+    circle(bob, 1)
     turtle.mainloop()
 
 def circle(t, r):
-         
-    length = 2 * r
-    n = 360 
+    circumference = 2 * math.pi * r
+    n = int(circumference / 3) + 3
+    length = circumference / n
+ 
     polygon(t, length, n)
 
 bob()
